@@ -56,7 +56,7 @@
 		<div style="border:2px solid black;border-radius:10px;padding:20px">
 			<p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below to create a watch-only wallet.<br>This information will not leave your browser!</p>
 			<div class="form-group row">
-				<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase" value="accept rare smoke hook stain reply lip alas painful dirt tight flood">
+				<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase">
 			</div>
 			<div class="form-group row">
 				<div class="input-group">
@@ -131,9 +131,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- Crypto -->
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+<script src="js/sha256.js"></script>
+<script src="js/enc-base64-min.js"></script>
+<script src="js/aes.js"></script>
 <!-- Bitcore, CW, and my code -->
 <script src="js/bitcore.js"></script>
 <script src="js/mnemonic.js"></script>
