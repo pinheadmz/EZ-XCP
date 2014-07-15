@@ -70,20 +70,26 @@
 
 <div class="container">
 	<!-- Example row of columns -->
-	<div class="row" style="display:none" id="mainDisplay">
-		<div class="col-md-4">
-			<h2>Master Public Key:</h2>
-			<p><pre id="MasPubKeyDisplay"></pre></p>
-	 </div>
-		<div class="col-md-4">
-			<h2>Derived Addresses:</h2>
-			<p><pre id="addressesDisplay"></pre></p>
-			<p><a class="btn btn-default" onclick="loadMoreAddresses()" role="button">Load 3 more addresses...</a></p>
+	<div style="display:none" id="mainDisplay">
+		<div class="row" >
+			<div class="col-md-4">
+				<h2>Master public key:</h2>
+				<p><pre id="MasPubKeyDisplay"></pre></p>
+			</div>
+			<div class="col-md-4">
+				<h2>Derived addresses:</h2>
+				<p><pre id="addressesDisplay"></pre></p>
+				<p><a class="btn btn-default" onclick="loadMoreAddresses()" role="button">Load 3 more addresses...</a></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<h2>Address asset balances:</h2>
+				<div id="balanceDisplay"></div>
+			</div>
 		</div>
 	</div>
-
 	<hr>
-
 	<footer>
 		<p>Created by Matthew Zipkin 2014</p>
 	</footer>

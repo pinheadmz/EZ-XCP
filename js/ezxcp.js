@@ -49,10 +49,22 @@ function refreshDisplay(){
 	$('#mainDisplay').slideDown();
 	$('#MasPubKeyDisplay').html(PUBLIC_WALLET.HK.extendedPublicKeyString());
 	$('#addressesDisplay').html('');
+	$('#balanceDisplay').html('');
 	$.each(PUBLIC_WALLET.addresses, function(i,v){
 		$('#addressesDisplay').append(v.address + '\r\n');
-	});
 
+		if (v.info.status == "error"){
+			newBal = '<p><pre>'+ v.address +'</pre>';
+			newBal += 'No assets</p>';
+		} else {
+			newBal = '<p><pre>'+ v.address +'</pre>';
+			$.each(v.info.data, function(ii, vv){
+				newBal += vv.asset + " balance: " + vv.balance + "<br>";
+			});
+			newBal += '</p>';
+		}
+		$('#balanceDisplay').append(newBal);
+	});
 }
 
 // add derivative addresses to wallet
@@ -67,8 +79,19 @@ function loadMoreAddresses(){
 		PUBLIC_WALLET.addresses.push(thisAddr);
 	}
 	
-	refreshDisplay();
+	// get address information via BLOCKSCAN API
+	$.post('blockscan.php', 
+			{addrs: PUBLIC_WALLET.addresses},
+			function(response){
+				$.each(response, function(i,v){
+					PUBLIC_WALLET.addresses[i].info = JSON.parse(v);				
+				});
+			},
+			'json'
+	).done(function(){refreshDisplay()});
 }
+
+// 
 
 // load wallet from master public key
 function loadWallet(masPubKey){
@@ -78,20 +101,6 @@ function loadWallet(masPubKey){
 	// generate first four addresses
 	PUBLIC_WALLET.addresses = [];
 	loadMoreAddresses();
-
-	// get address information via BLOCKSCAN API
-	$.post('blockscan.php', 
-			{addrs: PUBLIC_WALLET.addresses},
-			function(response){
-				$.each(response, function(i,v){
-					PUBLIC_WALLET.addresses[i].info = JSON.parse(v);				
-				});			
-			},
-			'json'
-	);
-
-	refreshDisplay();
-	console.log(PUBLIC_WALLET);
 }
 
 // generate wallet
