@@ -57,11 +57,31 @@ function loadWallet(masPubKey, numAddr){
 		thisAddr.address = bitcore.Address.fromPubKey( PUBLIC_WALLET.HK.derive('m/' + i).eckey.public ).toString();
 		PUBLIC_WALLET.addresses.push(thisAddr);
 	}
-	
+/*
 	// get address information via BLOCKSCAN API
-	for (var i = 0; i < PUBLIC_WALLET.addresses.length; i++){
+	for (var i = 0; i < PUBLIC_WALLET.addresses.length; i++){	
+		$.ajax({
+			url: 'http://blockscan.com/api2.aspx?module=balance&address=' + PUBLIC_WALLET.addresses[i].address,
+			jsonp: "callback",
+			dataType: "jsonp",
+		 
+			// tell YQL what we want and that we want JSON
+			data: {
+				q: "select title,abstract,url from search.news where query=\"cat\"",
+				format: "json"
+			},
+		 
+			// work with the response
+			success: function( response ) {
+				console.log( response ); // server response
+			}
+		});
+		
+	
+	
 			PUBLIC_WALLET.addresses[i].info = $.getJSON('http://blockscan.com/api2.aspx?module=balance&address=' + PUBLIC_WALLET.addresses[i].address,
 														function(data){return data});
+*/
 	}
 
 console.log(PUBLIC_WALLET);
