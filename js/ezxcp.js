@@ -1,7 +1,10 @@
+// global
+var WALLET = {};
+var PUBLIC_WALLET = {};
+
 // counterwallet identifier
 function getCWID(passphrase){
-	var hashBase = CryptoJS.SHA256(passphrase);
-	var hash = CryptoJS.SHA256(hashBase).toString(CryptoJS.enc.Base64);
+	var hash = CryptoJS.SHA256(CryptoJS.SHA256(passphrase)).toString(CryptoJS.enc.Base64);
 	return hash;
 }
 
@@ -32,14 +35,56 @@ function checkPP(passphrase){
 
 // click accept button
 function acceptPP(){
-	var PP = $('#CWpassphrase').val();
-	var cleanPP = checkPP(PP);
+	var passphrase = $('#CWpassphrase').val();
+	var cleanPP = checkPP(passphrase);
 	if(!cleanPP)
 		alert("Passphrase Error");
 	else
-		console.log(getCWID(cleanPP));
+		genWallet(cleanPP);
 }
 
+// load wallet from master public key
+function loadWallet(masPubKey, numAddr){
+	var numAddr = (typeof numAddr !== 'undefined' ? numAddr : 3);
+		
+	// create new HD wallet form master public key
+	PUBLIC_WALLET.HK = new bitcore.HierarchicalKey(masPubKey);
+	
+	// generate addresses
+	PUBLIC_WALLET.addresses = [];
+	for (var i = 0; i < numAddr; i++){
+		var thisAddr = {};
+		thisAddr.address = bitcore.Address.fromPubKey( PUBLIC_WALLET.HK.derive('m/' + i).eckey.public ).toString();
+		PUBLIC_WALLET.addresses.push(thisAddr);
+	}
+	
+	// get address information via BLOCKSCAN API
+	for (var i = 0; i < PUBLIC_WALLET.addresses.length; i++){
+			PUBLIC_WALLET.addresses[i].info = $.getJSON('http://blockscan.com/api2.aspx?module=balance&address=' + PUBLIC_WALLET.addresses[i].address,
+														function(data){return data});
+	}
+
+console.log(PUBLIC_WALLET);
+}
+
+// generate wallet
+function genWallet(cleanPP){
+	// hashed wallet ID counterwallet servers store and associate with preferences, wallet labels, etc.
+	WALLET.CWID	= getCWID(cleanPP);
+
+	// create bitcore object with HD keys based on seed from passphrase
+	var m = new Mnemonic(cleanPP.split(' '));
+	var hex = m.toHex();
+	WALLET.HK = new bitcore.HierarchicalKey.seed(hex, 'livenet');
+
+	// get counterwallet base master public key - not the root
+	WALLET.masterPublicKey = WALLET.HK.derive('m/0\'/0').extendedPublicKeyString();
+	
+console.log(WALLET);
+	
+	// load new wallet from master public key
+	loadWallet(WALLET.masterPublicKey);
+}
 
 
 /*

@@ -51,14 +51,25 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Easy Counterwallet</h1>
-        <p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below.<br>This information will not leave your browser!</p>
-		  <div class="form-group col-sm-8">
-			<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase">
+        <p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below to create a watch-only wallet.<br>This information will not leave your browser!</p>
+		  <div class="form-group row">
+			<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase" value="accept rare smoke hook stain reply lip alas painful dirt tight flood">
 		  </div>
-		  <button type="submit" onclick="acceptPP()" class="btn btn-default" id="acceptCWpassphrase">Accept</button>
+		<div class="form-group row">
+			<div class="input-group">
+				<span class="input-group-addon">
+					<input name="showPP" id="showPP" type="checkbox" onchange="document.getElementById('CWpassphrase').type = this.checked ? 'text' : 'password'">
+				</span>
+				<span class="input-group-addon">
+					<label for="showPP">Show passphrase</label>
+				</span>
+				<button type="submit" onclick="acceptPP()" class="btn btn-success" id="acceptCWpassphrase" style="float:right">Create watch-only wallet</button>
+			</div>
+			  
+		</div>
       </div>
     </div>
-<? /*
+
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
@@ -78,7 +89,7 @@
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
-*/ ?>
+
       <hr>
 
       <footer>
@@ -92,10 +103,17 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/ripemd160.js"></script>
+    
+<!--
 	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
 	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
-    <script src="js/bitcore.js"></script>
+	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+-->
+
+<!-- replace this with actual bitcore when available -->
+<script src="http://counterwallet.co/js/counterwallet-deps-min.js?v=01e1da406c05"></script>
+<script src="http://counterwallet.co/js/counterwallet-min.js?v=1260971d5021"></script>
+
     <script src="js/mnemonic.js"></script>
     <script src="js/ezxcp.js"></script>
   </body>
