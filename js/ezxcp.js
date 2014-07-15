@@ -105,6 +105,7 @@ function loadMoreAddresses(){
 function loadWallet(masPubKey){
 	// create new HD wallet form master public key
 	PUBLIC_WALLET.HK = new bitcore.HierarchicalKey(masPubKey);
+	PUBLIC_WALLET.masterPublicKey = masPubKey;
 	
 	// generate first four addresses
 	PUBLIC_WALLET.addresses = [];
@@ -127,4 +128,25 @@ function genWallet(cleanPP){
 	
 	// load new wallet from master public key
 	loadWallet(WALLET.masterPublicKey);
+}
+
+// send master public key to server for storage
+function store(){
+	$.post('store.php', 
+			{mpk: PUBLIC_WALLET.masterPublicKey,
+			id: $('#newID').val()},
+			function(response){
+				alert(response)
+			}
+	);
+}
+
+// retrieve master public key from server using easy ID
+function retrieve(){
+	$.post('retrieve.php', 
+			{id: $('#watchID').val()},
+			function(response){
+				loadWallet(response)
+			}
+	);
 }
