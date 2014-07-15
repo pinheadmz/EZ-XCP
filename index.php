@@ -21,6 +21,7 @@
 </head>
 
 <body>
+<? /*
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
@@ -45,26 +46,42 @@
 		</div><!--/.navbar-collapse -->
 	</div>
 </div>
+*/ ?>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
 	<div class="container">
-		<h1>Easy Counterwallet</h1>
-		<p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below to create a watch-only wallet.<br>This information will not leave your browser!</p>
-		<div class="form-group row">
-			<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase" value="accept rare smoke hook stain reply lip alas painful dirt tight flood">
+		<h1>Watch-Only Counterwallet</h1>
+		
+		<div style="border:2px solid black;border-radius:10px;padding:20px">
+			<p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below to create a watch-only wallet.<br>This information will not leave your browser!</p>
+			<div class="form-group row">
+				<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase" value="accept rare smoke hook stain reply lip alas painful dirt tight flood">
+			</div>
+			<div class="form-group row">
+				<div class="input-group">
+					<span class="input-group-addon">
+						<input name="showPP" id="showPP" type="checkbox" onchange="document.getElementById('CWpassphrase').type = this.checked ? 'text' : 'password'">
+					</span>
+					<span class="input-group-addon">
+						<label for="showPP">Show</label>
+					</span>
+					<button type="submit" onclick="acceptPP()" class="btn btn-success" id="acceptCWpassphrase" style="float:right">Create watch-only wallet</button>
+				</div>			
+			</div>
 		</div>
-		<div class="form-group row">
-			<div class="input-group">
-				<span class="input-group-addon">
-					<input name="showPP" id="showPP" type="checkbox" onchange="document.getElementById('CWpassphrase').type = this.checked ? 'text' : 'password'">
-				</span>
-				<span class="input-group-addon">
-					<label for="showPP">Show passphrase</label>
-				</span>
-				<button type="submit" onclick="acceptPP()" class="btn btn-success" id="acceptCWpassphrase" style="float:right">Create watch-only wallet</button>
-			</div>			
+		<br>
+		<div style="border:2px solid black;border-radius:10px;padding:20px">
+			<p>Already have a watch-only wallet? Enter your easy identifier here to retrieve it</p>
+			<div class="form-group row">
+				<div class="col-xs-5">
+					<input type="text" class="form-control" id="watchID" placeholder="Enter your easy identifer">
+				</div>
+				<button type="submit" onclick="retrieve()" class="btn btn-success" id="acceptRetrieve" style="float:right">Retrieve</button>
+			</div>
+
 		</div>
+		
 	</div>
 </div>
 
@@ -81,6 +98,16 @@
 				<p><pre id="addressesDisplay"></pre></p>
 				<p><a class="btn btn-default" onclick="loadMoreAddresses()" role="button">Load 3 more addresses...</a></p>
 			</div>
+			<div class="col-md-4">
+				<h2>Store this watch-only wallet on server:</h2>
+					<input type="text" class="form-control" id="newID" placeholder="Enter an easy identifer">
+				<br><a class="btn btn-success" onclick="store()" role="button">Store on server</a>
+			</div>
+			
+			
+			
+			
+			
 		</div>
 		<div class="row">
 			<div class="col-md-8">
