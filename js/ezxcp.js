@@ -78,20 +78,20 @@ function loadWallet(masPubKey){
 	// generate first four addresses
 	PUBLIC_WALLET.addresses = [];
 	loadMoreAddresses();
-/*
+
 	// get address information via BLOCKSCAN API
-	$.ajax({
-		url: 'http://blockscan.com/api2.aspx?module=balance&address=' + PUBLIC_WALLET.addresses[i].address,
-		jsonp: "callback",
-		dataType: "jsonp",
-	 
-		// work with the response
-		success: function( response ) {
-			console.log( response ); // server response
-		}
-	});
-*/
-	refreshDisplay()
+	$.post('blockscan.php', 
+			{addrs: PUBLIC_WALLET.addresses},
+			function(response){
+				$.each(response, function(i,v){
+					PUBLIC_WALLET.addresses[i].info = JSON.parse(v);				
+				});			
+			},
+			'json'
+	);
+
+	refreshDisplay();
+	console.log(PUBLIC_WALLET);
 }
 
 // generate wallet
