@@ -8,7 +8,7 @@
 	<meta name="author" content="">
 	<link rel="icon" href="favicon.ico">
 
-	<title>Easy Counterwallet</title>
+	<title>Watch-Only Counterwallet</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -100,8 +100,8 @@
 			</div>
 			<div class="col-md-4">
 				<h2>Store this watch-only wallet on server:</h2>
-					<input type="text" class="form-control" id="newID" placeholder="Enter an easy identifer">
-				<br><a class="btn btn-success" onclick="store()" role="button">Store on server</a>
+				<input type="text" class="form-control" id="newID" placeholder="Enter an easy identifer"><br>
+				<a class="btn btn-success" onclick="store()" role="button">Store on server</a>
 			</div>
 			
 			
@@ -110,9 +110,13 @@
 			
 		</div>
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-4">
 				<h2>Address asset balances:</h2>
 				<div id="balanceDisplay"></div>
+			</div>
+			<div class="col-md-4">
+				<h2>Wallet total balances:</h2>
+				<div id="totalDisplay"></div>
 			</div>
 		</div>
 	</div>

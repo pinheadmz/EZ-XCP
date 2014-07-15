@@ -50,20 +50,30 @@ function refreshDisplay(){
 	$('#MasPubKeyDisplay').html(PUBLIC_WALLET.HK.extendedPublicKeyString());
 	$('#addressesDisplay').html('');
 	$('#balanceDisplay').html('');
+	$('#totalDisplay').html('');
+	PUBLIC_WALLET.assets = {};
 	$.each(PUBLIC_WALLET.addresses, function(i,v){
 		$('#addressesDisplay').append(v.address + '\r\n');
 
 		if (v.info.status == "error"){
-			newBal = '<p><pre>'+ v.address +'</pre>';
-			newBal += 'No assets</p>';
+			newBal = '<p><pre>';
+			newBal += '<a href="http://www.blockscan.com/address.aspx?q=' + v.address + '" target="_blank">' + v.address +'</a></pre>';
+			newBal += 'No assets</p><br>';
 		} else {
-			newBal = '<p><pre>'+ v.address +'</pre>';
+			newBal = '<p><pre>';
+			newBal += '<a href="http://www.blockscan.com/address.aspx?q=' + v.address + '" target="_blank">' + v.address +'</a></pre>';
 			$.each(v.info.data, function(ii, vv){
 				newBal += vv.asset + " balance: " + vv.balance + "<br>";
+				// update wallet total balances
+				//PUBLIC_WALLET.assets[vv.asset] = (PUBLIC_WALLET.assets[vv.asset] ? (PUBLIC_WALLET.assets[vv.asset] + vv.balance) : vv.balance);
+				PUBLIC_WALLET.assets[vv.asset] =  (PUBLIC_WALLET.assets[vv.asset] ? parseFloat(PUBLIC_WALLET.assets[vv.asset]) : 0) + parseFloat(vv.balance);
 			});
-			newBal += '</p>';
+			newBal += '</p><br>';
 		}
 		$('#balanceDisplay').append(newBal);
+	});
+	$.each(PUBLIC_WALLET.assets, function(i, v){
+		$('#totalDisplay').append(i + ": " + v + "<br>");
 	});
 }
 
@@ -91,8 +101,6 @@ function loadMoreAddresses(){
 	).done(function(){refreshDisplay()});
 }
 
-// 
-
 // load wallet from master public key
 function loadWallet(masPubKey){
 	// create new HD wallet form master public key
@@ -100,6 +108,7 @@ function loadWallet(masPubKey){
 	
 	// generate first four addresses
 	PUBLIC_WALLET.addresses = [];
+	PUBLIC_WALLET.assets = {};
 	loadMoreAddresses();
 }
 
