@@ -1,6 +1,9 @@
 <?
 	$DIR = 'users/';
-	$f = file_get_contents($DIR . $_POST['id'] . '.txt');
+	$ID = $_POST['id'];
+	$FILENAME = $DIR . $_POST['id'] . '.txt';
+	
+	$f = file_get_contents($FILENAME);
 	if ($f)
 		echo $f;
 	else

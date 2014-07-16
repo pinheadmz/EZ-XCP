@@ -34,18 +34,40 @@ function checkPP(passphrase){
 	     return cleanPP;
 }
 
+// show / hide loading message
+function loading(state){
+	if (state)
+		$('#loading').css('display','block');
+	else
+		$('#loading').css('display','none');
+}
+
 // click accept button
 function acceptPP(){
+	loading(true);
 	var passphrase = $('#CWpassphrase').val();
 	var cleanPP = checkPP(passphrase);
-	if(!cleanPP)
+	if(!cleanPP){
 		alert("Passphrase Error");
-	else
+		loading(false);
+	} else {
 		genWallet(cleanPP);
+	}
+}
+
+// start over with new wallet
+function reset(){
+	loading(false);
+	$('#start').slideDown();
+	$('#reset').slideUp();
+	$('#mainDisplay').slideUp();
+	$('input').val('');
 }
 
 // update info display
 function refreshDisplay(){
+	$('#start').slideUp();
+	$('#reset').slideDown();
 	$('#mainDisplay').slideDown();
 	$('#MasPubKeyDisplay').html(PUBLIC_WALLET.HK.extendedPublicKeyString());
 	$('#addressesDisplay').html('');
@@ -119,16 +141,22 @@ function openWallet(wallet){
 	if (wallet.substr(0,1) === '*'){
 		if (!$('#watchKey').val()){
 			alert('Error: This wallet is encrypted, password required');
+			loading(false);
 			return false;
 		}
 		// decrypt now
 		try {
 			masPubKey = CryptoJS.AES.decrypt(wallet.substr(1), $('#watchKey').val()).toString(CryptoJS.enc.Utf8);
+			if(!masPubKey){
+				alert('Error: Incorrect password');
+				loading(false);
+				return false;
+			}		
 		} catch(e) {
 			alert('Error: Incorrect password');
+			loading(false);
 			return false;
 		}
-
 		loadWallet(masPubKey);	
 	} else{
 		loadWallet(wallet);
@@ -171,13 +199,16 @@ function store(){
 
 // retrieve master public key from server using easy ID
 function retrieve(){
+	loading(true);
 	$.post('retrieve.php', 
 			{id: $('#watchID').val()},
 			function(response){
-				if(response === 'false')
-					alert('Wallet retrieval error');
-				else
+				if(response === 'false'){
+					alert('Wallet retrieval error\nCheck your Identifier');
+					loading(false);
+				} else {
 					openWallet(response)
+				}
 			}
 	);
 }

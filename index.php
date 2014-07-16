@@ -53,39 +53,57 @@
 	<div class="container">
 		<h1>Watch-Only Counterwallet</h1>
 		
-		<div style="border:2px solid black;border-radius:10px;padding:20px">
-			<p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below to create a watch-only wallet.<br>This information will not leave your browser!</p>
-			<div class="form-group row">
-				<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase" value="parent brush vast freak duck blend worst press cage smile silly knife">
+		<div id="start" style="position:relative">
+			<div id="loading" style="	display: none;
+										position: absolute;
+										width: 100%;
+										height: 100%;
+										background-color: rgba(163, 163, 163, 0.44);
+										color: white;
+										z-index: 100;
+										text-align: center;
+										line-height: 400px;
+										font-size: 130px;
+										border-radius: 10px;">Loading...</div>
+			<div style="border:2px solid black;border-radius:10px;padding:20px">
+				<p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below to create a watch-only wallet.<br>This information will not leave your browser!</p>
+				<div class="form-group row">
+					<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase" value="parent brush vast freak duck blend worst press cage smile silly knife">
+				</div>
+				<div class="form-group row">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<input name="showPP" id="showPP" type="checkbox" onchange="document.getElementById('CWpassphrase').type = this.checked ? 'text' : 'password'">
+						</span>
+						<span class="input-group-addon">
+							<label for="showPP">Show</label>
+						</span>
+						<button type="submit" onclick="acceptPP()" class="btn btn-success" id="acceptCWpassphrase" style="float:right">Create watch-only wallet</button>
+					</div>			
+				</div>
 			</div>
-			<div class="form-group row">
-				<div class="input-group">
-					<span class="input-group-addon">
-						<input name="showPP" id="showPP" type="checkbox" onchange="document.getElementById('CWpassphrase').type = this.checked ? 'text' : 'password'">
-					</span>
-					<span class="input-group-addon">
-						<label for="showPP">Show</label>
-					</span>
-					<button type="submit" onclick="acceptPP()" class="btn btn-success" id="acceptCWpassphrase" style="float:right">Create watch-only wallet</button>
-				</div>			
+			<br>
+			<div style="border:2px solid black;border-radius:10px;padding:20px">
+				<p>Already have a watch-only wallet? Enter your easy identifier here to retrieve it</p>
+				<div class="form-group row">
+					<div class="col-xs-6">
+						<input type="text" class="form-control" id="watchID" placeholder="Easy identifer" maxlength="16">
+					</div>
+					<div class="col-xs-6">
+						<input type="password" class="form-control" id="watchKey" placeholder="Decryption password (optional)">
+					</div>
+				</div>
+				<div class="form-group row">
+						<button type="submit" onclick="retrieve()" class="btn btn-success" id="acceptRetrieve" style="float:right">Retrieve</button>
+				</div>
 			</div>
 		</div>
-		<br>
-		<div style="border:2px solid black;border-radius:10px;padding:20px">
-			<p>Already have a watch-only wallet? Enter your easy identifier here to retrieve it</p>
+		<div id="reset" style="display:none">
 			<div class="form-group row">
-				<div class="col-xs-6">
-					<input type="text" class="form-control" id="watchID" placeholder="Easy identifer">
-				</div>
-				<div class="col-xs-6">
-					<input type="password" class="form-control" id="watchKey" placeholder="Decryption password (optional)">
-				</div>
-			</div>
-			<div class="form-group row">
-					<button type="submit" onclick="retrieve()" class="btn btn-success" id="acceptRetrieve" style="float:right">Retrieve</button>
+					<button type="submit" onclick="reset()" class="btn btn-default" id="reset" >Reset with new wallet</button>
 			</div>
 		</div>
-		
+				
 	</div>
 </div>
 
@@ -104,9 +122,10 @@
 			</div>
 			<div class="col-md-4">
 				<h2>Store this watch-only wallet on server:</h2>
-				<input type="text" class="form-control" id="newID" placeholder="Enter an easy identifer">
+				<input type="text" class="form-control" id="newID" placeholder="Enter an easy identifer" maxlength="16">
 				<small><i>(one word, alpha-numeric only)</i></small><br><br>
-				<input type="password" class="form-control" id="newIDkey" placeholder="(optional) Encrypt with password"><br>
+				<input type="password" class="form-control" id="newIDkey" placeholder="(optional) Encrypt with password">
+				<small><i>(password is not sent to server)</i></small><br><br>
 				<a class="btn btn-success" onclick="store()" role="button">Store on server</a>
 			</div>
 
