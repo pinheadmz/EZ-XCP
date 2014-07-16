@@ -1,4 +1,4 @@
-<?
+<?php
 	$DIR = 'users/';
 	$ID = $_POST['id'];
 	$FILENAME = $DIR . $_POST['id'] . '.txt';

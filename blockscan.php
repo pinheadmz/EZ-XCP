@@ -1,4 +1,4 @@
-<?
+<?php
 	$API = 'http://blockscan.com/api2.aspx?module=balance&address=';
 	$addrs = $_POST['addrs'];
 	$response = Array();
