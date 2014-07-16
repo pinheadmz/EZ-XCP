@@ -12,6 +12,7 @@ A solution to entering your 12-word passphrase into counterwallet.co just to che
 5. Come back later, enter your easy ID and optional encryption password to restore watch-only wallet
 
 Built with Bitcore
+
 All data comes from blockscan.com, plans in future to integrate my own bitcoin node with Counterparty
 
 
