@@ -1,4 +1,4 @@
-<?php
+<?php ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -141,4 +141,3 @@
 <script src="js/ezxcp.js"></script>
 </body>
 </html>
-?>
