@@ -66,7 +66,8 @@
 										font-size: 130px;
 										border-radius: 10px;">Loading...</div>
 			<div style="border:2px solid black;border-radius:10px;padding:20px">
-				<p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below to create a watch-only wallet.<br>This information will not leave your browser!</p>
+				<p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below to generate a watch-only wallet.<br>
+				<i>Your passphrase is not sent to the server</i></p>
 				<div class="form-group row">
 					<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase" value="parent brush vast freak duck blend worst press cage smile silly knife">
 				</div>
@@ -78,7 +79,7 @@
 						<span class="input-group-addon">
 							<label for="showPP">Show</label>
 						</span>
-						<button type="submit" onclick="acceptPP()" class="btn btn-success" id="acceptCWpassphrase" style="float:right">Create watch-only wallet</button>
+						<button type="submit" onclick="acceptPP()" class="btn btn-success" id="acceptCWpassphrase" style="float:right">Generate watch-only wallet</button>
 					</div>			
 				</div>
 			</div>
@@ -126,7 +127,8 @@
 				<small><i>(one word, alpha-numeric only)</i></small><br><br>
 				<input type="password" class="form-control" id="newIDkey" placeholder="(optional) Encrypt with password">
 				<small><i>(password is not sent to server)</i></small><br><br>
-				<a class="btn btn-success" onclick="store()" role="button">Store on server</a>
+				<a class="btn btn-success" onclick="store()" role="button">Store on server</a><br>
+				<small><i>Your master public key (optionally encrypted) is sent to the server.<br>No one can steal your coins or assets with just your public key</i></small><br><br>
 			</div>
 
 		</div>
@@ -143,7 +145,10 @@
 	</div>
 	<hr>
 	<footer>
-		<p>Created by Matthew Zipkin 2014</p>
+		<p>Created by Matthew Zipkin</p>
+		<p><i>tips? <a href="bitcoin:1NpGmWoQrbNhtjFSRSnZjbNozyXK4ZqD7e">1NpGmWoQrbNhtjFSRSnZjbNozyXK4ZqD7e</a></i></p>
+		<p>Built with <a href="http://bitcore.io/" target="_blank">Bitcore</a>, data from <a href="http://www.blockscan.com/" target="_blank">Blockscan API</a></p>
+		<p><a href="https://github.com/pinheadmz/EZ-XCP" target="_blank">View source on GitHub</a></p>
 	</footer>
 </div> <!-- /container -->
 

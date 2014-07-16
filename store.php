@@ -4,6 +4,12 @@
 	$FILENAME = $DIR . $_POST['id'] . '.txt';
 	$MPK = $_POST['mpk'];
 
+	// blank fields
+	if (!$ID || !$MPK){
+		echo "Error: Identifier can not be empty";
+		exit();
+	}
+	
 	// 16-character filenames only	
 	if(strlen($ID) > 16){
 		echo "Error: Identifier must be 16 characters or less";
