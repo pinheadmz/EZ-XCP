@@ -113,6 +113,28 @@ function loadWallet(masPubKey){
 	loadMoreAddresses();
 }
 
+// decrypt wallet if necesary
+function openWallet(wallet){
+	// decrypted?
+	if (wallet.substr(0,1) === '*'){
+		if (!$('#watchKey').val()){
+			alert('Error: This wallet is encrypted, password required');
+			return false;
+		}
+		// decrypt now
+		try {
+			masPubKey = CryptoJS.AES.decrypt(wallet.substr(1), $('#watchKey').val()).toString(CryptoJS.enc.Utf8);
+		} catch(e) {
+			alert('Error: Incorrect password');
+			return false;
+		}
+
+		loadWallet(masPubKey);	
+	} else{
+		loadWallet(wallet);
+	}
+}
+
 // generate wallet
 function genWallet(cleanPP){
 	// hashed wallet ID counterwallet servers store and associate with preferences, wallet labels, etc.
@@ -132,8 +154,14 @@ function genWallet(cleanPP){
 
 // send master public key to server for storage
 function store(){
+	// TODO: test for alpha-num
+	
+	var mpk = PUBLIC_WALLET.masterPublicKey;
+	if ($('#newIDkey').val())
+		mpk = '*' + CryptoJS.AES.encrypt(mpk, $('#newIDkey').val()).toString()
+
 	$.post('store.php', 
-			{mpk: PUBLIC_WALLET.masterPublicKey,
+			{mpk: mpk,
 			id: $('#newID').val()},
 			function(response){
 				alert(response)
@@ -146,7 +174,10 @@ function retrieve(){
 	$.post('retrieve.php', 
 			{id: $('#watchID').val()},
 			function(response){
-				loadWallet(response)
+				if(response === 'false')
+					alert('Wallet retrieval error');
+				else
+					openWallet(response)
 			}
 	);
 }

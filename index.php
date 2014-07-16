@@ -56,7 +56,7 @@
 		<div style="border:2px solid black;border-radius:10px;padding:20px">
 			<p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below to create a watch-only wallet.<br>This information will not leave your browser!</p>
 			<div class="form-group row">
-				<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase">
+				<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase" value="parent brush vast freak duck blend worst press cage smile silly knife">
 			</div>
 			<div class="form-group row">
 				<div class="input-group">
@@ -74,12 +74,16 @@
 		<div style="border:2px solid black;border-radius:10px;padding:20px">
 			<p>Already have a watch-only wallet? Enter your easy identifier here to retrieve it</p>
 			<div class="form-group row">
-				<div class="col-xs-5">
-					<input type="text" class="form-control" id="watchID" placeholder="Enter your easy identifer">
+				<div class="col-xs-6">
+					<input type="text" class="form-control" id="watchID" placeholder="Easy identifer">
 				</div>
-				<button type="submit" onclick="retrieve()" class="btn btn-success" id="acceptRetrieve" style="float:right">Retrieve</button>
+				<div class="col-xs-6">
+					<input type="password" class="form-control" id="watchKey" placeholder="Decryption password (optional)">
+				</div>
 			</div>
-
+			<div class="form-group row">
+					<button type="submit" onclick="retrieve()" class="btn btn-success" id="acceptRetrieve" style="float:right">Retrieve</button>
+			</div>
 		</div>
 		
 	</div>
@@ -100,14 +104,12 @@
 			</div>
 			<div class="col-md-4">
 				<h2>Store this watch-only wallet on server:</h2>
-				<input type="text" class="form-control" id="newID" placeholder="Enter an easy identifer"><br>
+				<input type="text" class="form-control" id="newID" placeholder="Enter an easy identifer">
+				<small><i>(one word, alpha-numeric only)</i></small><br><br>
+				<input type="password" class="form-control" id="newIDkey" placeholder="(optional) Encrypt with password"><br>
 				<a class="btn btn-success" onclick="store()" role="button">Store on server</a>
 			</div>
-			
-			
-			
-			
-			
+
 		</div>
 		<div class="row">
 			<div class="col-md-4">

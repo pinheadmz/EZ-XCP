@@ -1,5 +1,5 @@
-Watch-only Counterwallet with easy ID service
-=============================================
+Watch-only Counterparty wallet with easy ID service
+===================================================
 
 Watch-only Counterparty wallet built from 12-word Counterwallet seed, with server-stored master public key and easy recall ID.
 
