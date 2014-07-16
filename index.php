@@ -124,6 +124,7 @@
 		<p><i>tips? <a href="bitcoin:1NpGmWoQrbNhtjFSRSnZjbNozyXK4ZqD7e">1NpGmWoQrbNhtjFSRSnZjbNozyXK4ZqD7e</a></i></p>
 		<p>Built with <a href="http://bitcore.io/" target="_blank">Bitcore</a>, data from <a href="http://www.blockscan.com/" target="_blank">Blockscan API</a></p>
 		<p><a href="https://github.com/pinheadmz/EZ-XCP" target="_blank">View source on GitHub</a></p>
+		<p>This server is also a <a href="/node" target="_blank">full Bitcoin node</a></p>
 	</footer>
 </div> <!-- /container -->
 
