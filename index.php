@@ -44,7 +44,7 @@
 				<p>Enter your 12-word <a href="https://counterwallet.co/" target="_blank">Counterwallet</a> passphrase below to generate a watch-only wallet.<br>
 				<i>Your passphrase is not sent to the server</i></p>
 				<div class="form-group row">
-					<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase" value="parent brush vast freak duck blend worst press cage smile silly knife">
+					<input type="password" class="form-control" id="CWpassphrase" placeholder="Enter your 12-word Counterwallet passphrase" >
 				</div>
 				<div class="form-group row">
 					<div class="input-group">
