@@ -58,7 +58,9 @@
 					</div>			
 				</div>
 			</div>
+			
 			<br>
+			
 			<div style="border:2px solid black;border-radius:10px;padding:20px">
 				<p>Already have a watch-only wallet? Enter your easy identifier here to retrieve it</p>
 				<div class="form-group row">
@@ -73,6 +75,22 @@
 						<button type="submit" onclick="retrieve()" class="btn btn-success" id="acceptRetrieve" style="float:right">Retrieve</button>
 				</div>
 			</div>
+			
+			<br>
+			
+			<div style="border:2px solid black;border-radius:10px;padding:20px">
+				<p>...or simply enter your Master Public Key to privately load a watch-only wallet</p>
+				<div class="form-group row">
+					<div class="col-xs-12">
+						<input type="text" class="form-control" id="MasPubKey" placeholder="Master Public Key starts with 'xpub...'">
+					</div>
+				</div>
+				<div class="form-group row">
+						<button type="submit" onclick="loadWallet( $('#MasPubKey').val() )" class="btn btn-success" id="loadMPK" style="float:right">Load from MPK</button>
+				</div>
+			</div>
+			
+			
 		</div>
 		<div id="reset" style="display:none">
 			<div class="form-group row">
