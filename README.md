@@ -11,9 +11,11 @@ A solution to entering your 12-word passphrase into counterwallet.co just to che
 4. With your watch-only wallet loaded, you can deterministically generate more receiving addresses and check balances
 5. Come back later, enter your easy ID and optional encryption password to restore watch-only wallet
 
+The utility can also build a watch-only wallet directly from the Master Public Key, without any server interaction necessary (except to retrieve individual address information)
+
 Built with Bitcore
 
 All data comes from blockscan.com, plans in future to integrate my own bitcoin node with Counterparty
 
 
-version: 1.0 (7.15.14)
+version: 1.1 (7.24.14)

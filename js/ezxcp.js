@@ -126,7 +126,14 @@ function loadMoreAddresses(){
 // load wallet from master public key
 function loadWallet(masPubKey){
 	// create new HD wallet form master public key
-	PUBLIC_WALLET.HK = new bitcore.HierarchicalKey(masPubKey);
+	try{
+		PUBLIC_WALLET.HK = new bitcore.HierarchicalKey(masPubKey);
+	} catch(e) {
+		alert('Error: Invalid Master Public Key');
+		loading(false);
+		return false;
+	}
+	
 	PUBLIC_WALLET.masterPublicKey = masPubKey;
 	
 	// generate first four addresses
