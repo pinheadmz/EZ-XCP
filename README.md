@@ -15,7 +15,7 @@ The utility can also build a watch-only wallet directly from the Master Public K
 
 Built with Bitcore
 
-All data comes from blockscan.com, plans in future to integrate my own bitcoin node with Counterparty
+Counterparty data comes from blockscan.com, plans in future to integrate my own bitcoin node with Counterparty
+Bitcoin data comes from blockchain.info
 
-
-version: 1.1 (7.24.14)
+version: 1.2 (7.30.14)

@@ -76,18 +76,20 @@ function refreshDisplay(){
 	PUBLIC_WALLET.assets = {};
 	$.each(PUBLIC_WALLET.addresses, function(i,v){
 		$('#addressesDisplay').append(v.address + '\r\n');
+		
+		newBal = '<p><pre>';
+		newBal += '<a href="http://www.blockscan.com/address.aspx?q=' + v.address + '" target="_blank">' + v.address +'</a></pre>';
 
-		if (v.info.status == "error"){
-			newBal = '<p><pre>';
-			newBal += '<a href="http://www.blockscan.com/address.aspx?q=' + v.address + '" target="_blank">' + v.address +'</a></pre>';
+		if (v.info.status == "error"){			
 			newBal += 'No assets</p><br>';
 		} else {
-			newBal = '<p><pre>';
-			newBal += '<a href="http://www.blockscan.com/address.aspx?q=' + v.address + '" target="_blank">' + v.address +'</a></pre>';
+			// BTC info from blockchain - only asset expressed in satoshis	
+			newBal += "BTC: " + (parseInt(v.BTC) / 100000000) + "<br>";
+			PUBLIC_WALLET.assets['BTC'] = (PUBLIC_WALLET.assets['BTC'] ? PUBLIC_WALLET.assets['BTC'] : 0) + parseInt(v.BTC);
+			// Blockscan XCP assets info
 			$.each(v.info.data, function(ii, vv){
-				newBal += vv.asset + " balance: " + vv.balance + "<br>";
+				newBal += vv.asset + ": " + vv.balance + "<br>";
 				// update wallet total balances
-				//PUBLIC_WALLET.assets[vv.asset] = (PUBLIC_WALLET.assets[vv.asset] ? (PUBLIC_WALLET.assets[vv.asset] + vv.balance) : vv.balance);
 				PUBLIC_WALLET.assets[vv.asset] =  (PUBLIC_WALLET.assets[vv.asset] ? parseFloat(PUBLIC_WALLET.assets[vv.asset]) : 0) + parseFloat(vv.balance);
 			});
 			newBal += '</p><br>';
@@ -95,7 +97,8 @@ function refreshDisplay(){
 		$('#balanceDisplay').append(newBal);
 	});
 	$.each(PUBLIC_WALLET.assets, function(i, v){
-		$('#totalDisplay').append(i + ": " + v + "<br>");
+		// BTC only asset expressed in satoshis
+		$('#totalDisplay').append(i + ": " + (i == "BTC" ? v / 100000000 : v) + "<br>");
 	});
 }
 
@@ -116,7 +119,10 @@ function loadMoreAddresses(){
 			{addrs: PUBLIC_WALLET.addresses},
 			function(response){
 				$.each(response, function(i,v){
-					PUBLIC_WALLET.addresses[i].info = JSON.parse(v);				
+					// Counterparty asset info array from blockscan
+					PUBLIC_WALLET.addresses[i].info = JSON.parse(v.XCP);				
+					// BTC info from blockchain
+					PUBLIC_WALLET.addresses[i].BTC = v.BTC;				
 				});
 			},
 			'json'
